@@ -42,7 +42,7 @@ const LoginPage = () => {
       )}
         <Link to={"/register"}>
           {" "}
-          <p className=" text-right text-sm">
+          <p className=" text-right text-sm mt-3">
             Dont have an account?<span className="underline">Signup</span>
           </p>
         </Link>
