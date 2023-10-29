@@ -1,5 +1,10 @@
 import { useState } from "react";
-import  {Link}  from "react-router-dom";
+import { motion } from "framer-motion";
+import { Link } from "react-router-dom";
+import undraw1 from '../assets/undraw1.svg'
+import undraw2 from '../assets/undraw2.svg'
+import undraw3 from '../assets/undraw3.svg'
+import undraw4 from "../assets/undraw4.svg";
 
 const LoginPage = () => {
     const [email, setemail] = useState("");
@@ -10,9 +15,16 @@ const LoginPage = () => {
     const handleLogin = async (e) => {
     };
   return (
-    <div className="h-screen grid place-items-center">
-      <div className=" shadow-2xl p-6 rounded-2xl">
-        <h1 className=" mb-4 text-lg font-bold">Login</h1>
+    <div className="h-screen grid md:grid-flow-col place-items-center">
+      <div className="md:flex hidden">
+        <img src={undraw2} width={450} />
+
+      </div>
+      <motion.div
+        initial={{ y: "-100vh" }}
+        animate={{y:0}}
+        className=" shadow-2xl p-6 rounded-2xl">
+        <h1 className="text-center mb-4 text-lg font-bold text-green-600">Login</h1>
         <div className="flex flex-col">
           <input
             type="text"
@@ -36,17 +48,17 @@ const LoginPage = () => {
           </button>
         </div>
         {error && (
-        <p className=" bg-red-500 w-fit rounded px-2 text-white text-sm my-1">
-          {error}
-        </p>
-      )}
-        <Link to={"/register"}>
+          <p className=" bg-red-500 w-fit rounded px-2 text-white text-sm my-1">
+            {error}
+          </p>
+        )}
+        <Link to="/Register">
           {" "}
           <p className=" text-right text-sm mt-3">
             Dont have an account?<span className="underline">Signup</span>
           </p>
         </Link>
-      </div>
+      </motion.div>
     </div>
   );
 }

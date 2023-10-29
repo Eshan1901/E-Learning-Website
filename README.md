@@ -76,3 +76,5 @@ npm install react-scripts --save
 npm i react-router-dom
 npm install -D tailwindcss
 npx tailwindcss init
+npm install framer-motion
+npm install react-icons --save

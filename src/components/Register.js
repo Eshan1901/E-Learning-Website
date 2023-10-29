@@ -1,6 +1,10 @@
 
-
+import { motion } from "framer-motion";
 import { useState } from "react";
+import undraw1 from "../assets/undraw1.svg";
+import undraw2 from "../assets/undraw2.svg";
+import undraw3 from "../assets/undraw3.svg";
+import undraw4 from "../assets/undraw4.svg";
 import { Link } from 'react-router-dom'
 
 const Register = () => {
@@ -54,9 +58,18 @@ const Register = () => {
     // }
   };
   return (
-    <div className="grid place-items-center h-screen">
-      <div className=" shadow-2xl p-6 rounded-2xl">
-        <h1 className=" mb-4 text-lg font-bold">Details</h1>
+    <div className="grid md:grid-flow-col place-items-center h-screen">
+      <div className="md:flex hidden">
+        <img src={undraw2} width={450} />
+      </div>
+      <motion.div
+        initial={{ y: "-100vh" }}
+        animate={{ y: 0 }}
+        className=" shadow-2xl p-6 rounded-2xl"
+      >
+        <h1 className=" text-center mb-4 text-lg font-bold text-green-600">
+          Details
+        </h1>
         <div className="flex flex-col">
           <input
             type="text"
@@ -91,13 +104,13 @@ const Register = () => {
             {error}
           </p>
         )}
-        <Link to="/">
+        <Link to="/Login">
           {" "}
           <p className="text-right text-sm mt-3">
             Already have an account?<span className="underline">Login</span>
           </p>
         </Link>
-      </div>
+      </motion.div>
     </div>
   );
 };
