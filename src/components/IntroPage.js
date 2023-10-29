@@ -3,6 +3,7 @@ import { motion } from "framer-motion";
 import {Link} from 'react-router-dom'
 import undraw3 from "../assets/undraw3.svg";
 import undraw4 from "../assets/undraw4.svg";
+import LogoSvg from "../assets/LogoSvg.svg"
 import {AiOutlineArrowRight,AiOutlineArrowLeft} from 'react-icons/ai'
 
 
@@ -17,9 +18,9 @@ const IntroPage = () => {
           initial={{ y: "-100vh" }}
           animate={{ y: 0 }}
           transition={{ delay: 1 }}
-          className="h-fit w-1/2 flex justify-between items-baseline shadow-2xl px-6 py-3 rounded-2xl"
+          className="h-fit w-3/4 flex justify-between items-center shadow-2xl px-6 py-3 rounded-2xl"
         >
-          <h1>Logo</h1>
+          <img src={LogoSvg} width={110}/>
           <div className="flex items-center">
             <Link to="/Login">
               <button className="bg-black border-black hover:bg-white hover:text-black  border-2 text-white px-3 py-1 mx-3">

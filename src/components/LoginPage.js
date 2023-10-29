@@ -1,10 +1,10 @@
 import { useState } from "react";
 import { motion } from "framer-motion";
 import { Link } from "react-router-dom";
-import undraw1 from '../assets/undraw1.svg'
 import undraw2 from '../assets/undraw2.svg'
-import undraw3 from '../assets/undraw3.svg'
-import undraw4 from "../assets/undraw4.svg";
+import LogoSvg from "../assets/LogoSvg.svg";
+
+
 
 const LoginPage = () => {
     const [email, setemail] = useState("");
@@ -18,14 +18,16 @@ const LoginPage = () => {
     <div className="h-screen grid md:grid-flow-col place-items-center">
       <div className="md:flex hidden">
         <img src={undraw2} width={450} />
-
       </div>
       <motion.div
         initial={{ y: "-100vh" }}
-        animate={{y:0}}
-        className=" shadow-2xl p-6 rounded-2xl">
-        <h1 className="text-center mb-4 text-lg font-bold text-green-600">Login</h1>
-        <div className="flex flex-col">
+        animate={{ y: 0 }}
+        className=" shadow-2xl p-6 rounded-2xl"
+      >
+        <div className="flex justify-center my-4">
+          <img src={LogoSvg} width={100} />
+        </div>
+        <div className="flex flex-col gap-2">
           <input
             type="text"
             placeholder="Email"
@@ -41,14 +43,14 @@ const LoginPage = () => {
             className="input"
           />
           <button
-            className=" bg-green-600 text-white py-1 my-2"
+            className=" bg-green-600 text-white py-1 my-2 rounded"
             // onClick={handleLogin}
           >
             Login
           </button>
         </div>
         {error && (
-          <p className=" bg-red-500 w-fit rounded px-2 text-white text-sm my-1">
+          <p className=" bg-red-500 w-fit rounded px-2 py-1 text-white text-sm my-1">
             {error}
           </p>
         )}

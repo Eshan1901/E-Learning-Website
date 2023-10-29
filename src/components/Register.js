@@ -1,10 +1,9 @@
 
 import { motion } from "framer-motion";
 import { useState } from "react";
-import undraw1 from "../assets/undraw1.svg";
 import undraw2 from "../assets/undraw2.svg";
-import undraw3 from "../assets/undraw3.svg";
-import undraw4 from "../assets/undraw4.svg";
+import LogoSvg from "../assets/LogoSvg.svg";
+
 import { Link } from 'react-router-dom'
 
 const Register = () => {
@@ -67,10 +66,10 @@ const Register = () => {
         animate={{ y: 0 }}
         className=" shadow-2xl p-6 rounded-2xl"
       >
-        <h1 className=" text-center mb-4 text-lg font-bold text-green-600">
-          Details
-        </h1>
-        <div className="flex flex-col">
+        <div className="flex justify-center my-4">
+          <img src={LogoSvg} width={100} />
+        </div>
+        <div className="flex flex-col gap-2">
           <input
             type="text"
             placeholder="Name"
@@ -93,14 +92,14 @@ const Register = () => {
             className="input"
           />
           <button
-            className=" bg-green-600 text-white py-1 my-2"
+            className=" bg-green-600 text-white py-1 my-2 rounded"
             onClick={handleSignup}
           >
             Signup
           </button>
         </div>
         {error && (
-          <p className="rounded px-2 bg-red-500 w-fit  text-white text-sm my-3">
+          <p className="rounded px-2 py-1 bg-red-500 w-fit  text-white text-sm my-3">
             {error}
           </p>
         )}
