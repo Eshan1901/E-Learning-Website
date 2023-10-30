@@ -4,6 +4,8 @@ import { useNavigate } from "react-router-dom";
 import { useState } from "react";
 import undraw2 from "../assets/undraw2.svg";
 import LogoSvg from "../assets/LogoSvg.svg";
+import { ColorRing } from "react-loader-spinner";
+
 
 import { Link } from 'react-router-dom'
 
@@ -12,13 +14,33 @@ const Register = () => {
   const [email, setemail] = useState("");
   const [password, setpassword] = useState("");
   const [error, seterror] = useState("");
+  const [status, setstatus] = useState(false);
+
   const navigate=useNavigate()
 
   const handleSignup = async () => {
-    navigate("/Login");
-    // if (Response.ok === true) {
-    //      navigate('/Login')
-    // }
+    setstatus(true);
+    const res = await fetch("http://localhost:5000/register-data", {
+      method: "POST",
+      headers: {
+        "Content-type":"application/json"
+      },
+      body: JSON.stringify({
+        name,email,password
+      })
+    });
+    const data = await res.json()
+    // console.log(data)
+    if (data.result === "Registered") {
+      seterror("");
+      navigate("/Login");
+
+    } else {
+      seterror(data.error);
+      setstatus(false);
+
+    }
+    
   };
   return (
     <div className="grid md:grid-flow-col place-items-center h-screen">
@@ -56,10 +78,22 @@ const Register = () => {
             className="input"
           />
           <button
-            className=" bg-green-600 text-white py-1 my-2 rounded"
+            className="flex justify-center bg-green-600 text-white py-1 my-2 rounded"
             onClick={handleSignup}
           >
-            Signup
+            {status ? (
+              <ColorRing
+                visible={true}
+                height="25"
+                width="25"
+                ariaLabel="blocks-loading"
+                wrapperStyle={{}}
+                wrapperClass="blocks-wrapper"
+                colors={["white", "white", "white", "white", "white"]}
+              />
+            ) : (
+              "Signup"
+            )}
           </button>
         </div>
         {error && (

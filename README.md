@@ -79,3 +79,4 @@ npx tailwindcss init
 npm install framer-motion
 npm install react-icons --save
 npm install js-cookie --save
+npm i react-loader-spinner

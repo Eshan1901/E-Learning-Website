@@ -5,20 +5,37 @@ import { motion } from "framer-motion";
 import { Link } from "react-router-dom";
 import undraw2 from '../assets/undraw2.svg'
 import LogoSvg from "../assets/LogoSvg.svg";
-
+import { ColorRing } from "react-loader-spinner";
 
 
 const LoginPage = () => {
   const [email, setemail] = useState("");
   const [password, setpassword] = useState("");
   const [error, seterror] = useState("");
+  const [status, setstatus] = useState(false)
   const navigate = useNavigate();
-  
-  const token=Cookies.get("token")
-  const handleLogin = () => {
-    // Cookies.set("token","abc",{expires:10})
-    navigate("/Dashboard");
+  const handleLogin = async () => {
+    setstatus(true)
+    const res = await fetch("http://localhost:5000/login-data", {
+      method: "POST",
+      headers: {
+        "Content-type":"application/json"
+      },
+      body: JSON.stringify({
+        email,password
+      })
+    });
+    const data = await res.json()
+    console.log(data)
+    if (data.loginStatus === "Success") {
+      Cookies.set("userId",data.id,{expires:10});
+      navigate("/Dashboard");
+    } else {
+      seterror(data.error);
+      setstatus(false)
+    }
   };
+  const token = Cookies.get("userId");
   if (token !== undefined) {
    return <Navigate to='/Dashboard'/>
   }
@@ -39,22 +56,34 @@ const LoginPage = () => {
           <input
             type="text"
             placeholder="Email"
-            // onChange={(e) => setemail(e.target.value)}
-            // value={email}
+            onChange={(e) => setemail(e.target.value)}
+            value={email}
             className="input"
           />
           <input
             type="password"
             placeholder="Password"
-            // onChange={(e) => setpassword(e.target.value)}
-            // value={password}
+            onChange={(e) => setpassword(e.target.value)}
+            value={password}
             className="input"
           />
           <button
-            className=" bg-green-600 text-white py-1 my-2 rounded"
+            className="flex justify-center bg-green-600 text-white py-1 my-2 rounded"
             onClick={handleLogin}
           >
-            Login
+            {status ? (
+              <ColorRing
+                visible={true}
+                height="25"
+                width="25"
+                ariaLabel="blocks-loading"
+                wrapperStyle={{}}
+                wrapperClass="blocks-wrapper"
+                colors={["white", "white", "white", "white", "white"]}
+              />
+            ) : (
+              "Login"
+            )}
           </button>
         </div>
         {error && (
