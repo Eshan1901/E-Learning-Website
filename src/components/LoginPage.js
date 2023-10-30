@@ -15,6 +15,7 @@ const LoginPage = () => {
   const [status, setstatus] = useState(false)
   const navigate = useNavigate();
   const handleLogin = async () => {
+
     setstatus(true)
     const res = await fetch("http://localhost:5000/login-data", {
       method: "POST",
@@ -74,8 +75,8 @@ const LoginPage = () => {
             {status ? (
               <ColorRing
                 visible={true}
-                height="30"
-                width="30"
+                height="29"
+                width="29"
                 ariaLabel="blocks-loading"
                 wrapperStyle={{}}
                 wrapperClass="blocks-wrapper"

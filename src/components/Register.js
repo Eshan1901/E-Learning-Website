@@ -18,18 +18,24 @@ const Register = () => {
   const navigate=useNavigate()
 
   const handleSignup = async () => {
+    if (!email || !password || !name) {
+      seterror("All feilds required")
+      return
+    }
     setstatus(true);
 
     const res = await fetch("http://localhost:5000/register-data", {
       method: "POST",
       headers: {
-        "Content-type":"application/json"
+        "Content-type": "application/json",
       },
       body: JSON.stringify({
-        name,email,password
-      })
+        name,
+        email,
+        password,
+      }),
     });
-    const data = await res.json()
+    const data = await res.json();
     if (data.result === "Registered") {
       seterror("");
       navigate("/Login");
@@ -37,7 +43,6 @@ const Register = () => {
       seterror(data.error);
       setstatus(false);
     }
-    
   };
   return (
     <div className="grid md:grid-flow-col place-items-center h-screen">
