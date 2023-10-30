@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { useNavigate,Navigate } from "react-router-dom";
+import { useNavigate, Navigate } from "react-router-dom";
 import Cookies from "js-cookie";
 import { motion } from "framer-motion";
 import { Link } from "react-router-dom";
@@ -9,11 +9,14 @@ import { ColorRing } from "react-loader-spinner";
 
 
 const LoginPage = () => {
-  const [email, setemail] = useState("");
-  const [password, setpassword] = useState("");
+  const [data, setData] = useState({
+    email: "",
+    password: ""
+  })
   const [error, seterror] = useState("");
   const [status, setstatus] = useState(false)
   const navigate = useNavigate();
+<<<<<<< HEAD
   const handleLogin = async () => {
     setstatus(true)
     const res = await fetch("http://localhost:5000/login-data", {
@@ -38,7 +41,56 @@ const LoginPage = () => {
   const token = Cookies.get("userId");
   if (token !== undefined) {
    return <Navigate to='/Dashboard'/>
+=======
+
+  const token = Cookies.get("token")
+  const handleChange = async (e) => {
+    setData({ ...data, [e.target.name]: e.target.value })
+>>>>>>> f5f3c75774f8fa49d931afc85f41f8d6548c987f
   }
+
+  const handleSubmit = async () => {
+    var userdata;
+    console.log(data.email,data.password);
+    if (data.email !== "" && data.password !== "") {
+      try {
+        const response = await fetch("http://localhost:5000/user-data");
+  
+        if (response.status === 200) {
+          userdata= await response.json();
+        } else {
+          console.log("Response status is not 200");
+        }
+      } catch (error) {
+        console.error(error);
+      }
+      userdata = JSON.parse(userdata);
+      var foundEmail = 0;
+      var foundItem = null;
+      for (let i = 0;i < userdata.length;i++) {
+        if (data.email === userdata[i].email) {
+          foundEmail = foundEmail + 1;
+          foundItem = userdata[i];
+        }
+      }
+      if (foundEmail === 1) {
+        if (data.password === foundItem.password) {
+          navigate("/")
+        }
+        else {
+          seterror("Incorrect password!")
+        }
+      }
+      else {
+        seterror("Email not exits try register");
+      }
+    }
+    else {
+      seterror("All fileds are required");
+    }
+  }
+
+
   return (
     <div className="h-screen grid md:grid-flow-col place-items-center">
       <div className="md:flex hidden">
@@ -56,13 +108,19 @@ const LoginPage = () => {
           <input
             type="text"
             placeholder="Email"
+<<<<<<< HEAD
             onChange={(e) => setemail(e.target.value)}
             value={email}
+=======
+            onChange={handleChange}
+            name="email"
+>>>>>>> f5f3c75774f8fa49d931afc85f41f8d6548c987f
             className="input"
           />
           <input
             type="password"
             placeholder="Password"
+<<<<<<< HEAD
             onChange={(e) => setpassword(e.target.value)}
             value={password}
             className="input"
@@ -70,6 +128,15 @@ const LoginPage = () => {
           <button
             className="flex justify-center bg-green-600 text-white py-1 my-2 rounded"
             onClick={handleLogin}
+=======
+            onChange={handleChange}
+            name="password"
+            className="input"
+          />
+          <button
+            className=" bg-green-600 text-white py-1 my-2 rounded"
+            onClick={handleSubmit}
+>>>>>>> f5f3c75774f8fa49d931afc85f41f8d6548c987f
           >
             {status ? (
               <ColorRing
