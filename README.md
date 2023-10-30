@@ -78,3 +78,4 @@ npm install -D tailwindcss
 npx tailwindcss init
 npm install framer-motion
 npm install react-icons --save
+npm install js-cookie --save

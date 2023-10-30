@@ -1,5 +1,6 @@
 
 import { motion } from "framer-motion";
+import { useNavigate } from "react-router-dom";
 import { useState } from "react";
 import undraw2 from "../assets/undraw2.svg";
 import LogoSvg from "../assets/LogoSvg.svg";
@@ -11,49 +12,12 @@ const Register = () => {
   const [email, setemail] = useState("");
   const [password, setpassword] = useState("");
   const [error, seterror] = useState("");
+  const navigate=useNavigate()
 
   const handleSignup = async () => {
-    // if (!name || !email || !password) {
-    //   seterror("All fields are necessary");
-    //   return;
-    // }
-
-    // const res = await fetch("/api/userExists", {
-    //   method: "POST",
-    //   headers: {
-    //     "Content-type": "application/json",
-    //   },
-    //   body: JSON.stringify({
-    //     name,
-    //     email,
-    //     password,
-    //   }),
-    // });
-
-    // if (res.status !== 200) {
-    //   seterror("User Already Exists");
-    //   return;
-    // }
-    // const response = await fetch("/api/register", {
-    //   method: "POST",
-    //   headers: {
-    //     "Content-type": "application/json",
-    //   },
-    //   body: JSON.stringify({
-    //     name,
-    //     email,
-    //     password,
-    //   }),
-    // });
-    // if (response.ok) {
-    //   console.log("User Created");
-    //   setemail("");
-    //   seterror("");
-    //   setpassword("");
-    //   setname("");
-    //   router.push("/");
-    // } else {
-    //   console.log("error");
+    navigate("/Login");
+    // if (Response.ok === true) {
+    //      navigate('/Login')
     // }
   };
   return (
@@ -99,9 +63,11 @@ const Register = () => {
           </button>
         </div>
         {error && (
-          <p className="rounded px-2 py-1 bg-red-500 w-fit  text-white text-sm my-3">
-            {error}
-          </p>
+          <div className="flex justify-center">
+            <p className=" bg-red-500 w-fit rounded px-2 py-1 text-white text-sm my-1">
+              {error}
+            </p>
+          </div>
         )}
         <Link to="/Login">
           {" "}
