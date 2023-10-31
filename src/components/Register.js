@@ -14,8 +14,13 @@ const Register = () => {
   const [password, setpassword] = useState("");
   const [error, seterror] = useState("");
   const [status, setstatus] = useState(false);
+  const [check, setcheck] = useState(false)
 
-  const navigate=useNavigate()
+  const navigate = useNavigate()
+  
+  const handleCheck = (e) => {
+    setcheck(e.target.checked);
+  }
 
   const handleSignup = async () => {
     if (!email || !password || !name) {
@@ -24,7 +29,7 @@ const Register = () => {
     }
     setstatus(true);
 
-    const res = await fetch("http://localhost:5000/register-data", {
+    const res = await fetch(`"http://localhost:5000/"${check ? "register-trainer-data":'register-data'}`, {
       method: "POST",
       headers: {
         "Content-type": "application/json",
@@ -97,6 +102,10 @@ const Register = () => {
               "Signup"
             )}
           </button>
+        </div>
+        <div className="flex justify-end gap-1 my-1">
+          <input type="checkbox" className="" onClick={handleCheck}/>
+          <p className="text-xs text-[#5927E5]">Register as trainer</p>
         </div>
         {error && (
           <div className="flex justify-center">

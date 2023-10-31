@@ -13,27 +13,43 @@ const LoginPage = () => {
   const [password, setpassword] = useState("");
   const [error, seterror] = useState("");
   const [status, setstatus] = useState(false)
+  const [check, setcheck] = useState(false);
   const navigate = useNavigate();
-  const handleLogin = async () => {
+    const handleCheck = (e) => {
+      setcheck(e.target.checked);
 
-    setstatus(true)
-    const res = await fetch("http://localhost:5000/login-data", {
-      method: "POST",
-      headers: {
-        "Content-type":"application/json"
-      },
-      body: JSON.stringify({
-        email,password
-      })
-    });
-    const data = await res.json()
-    console.log(data)
+    };
+  const handleLogin = async () => {
+    setstatus(true);
+        if (!email || !password) {
+          seterror("All feilds required");
+          setstatus(false);
+          return;
+        }
+    // console.log(
+    //   `http://localhost:5000/${check ? "login_trainer-data" : "login-data"}`
+    // );
+    const res = await fetch(
+      `http://localhost:5000/${check ? "login_trainer-data" : "login-data"}`,
+      {
+        method: "POST",
+        headers: {
+          "Content-type": "application/json",
+        },
+        body: JSON.stringify({
+          email,
+          password,
+        }),
+      }
+    );
+    const data = await res.json();
+    console.log(data);
     if (data.loginStatus === "Success") {
-      Cookies.set("userId",data.id,{expires:10});
+      Cookies.set("userId", data.id, { expires: 10 });
       navigate("/Dashboard");
     } else {
       seterror(data.error);
-      setstatus(false)
+      setstatus(false);
     }
   };
   const token = Cookies.get("userId");
@@ -86,6 +102,10 @@ const LoginPage = () => {
               "Login"
             )}
           </button>
+        </div>
+        <div className="flex justify-end gap-1 my-1">
+          <input type="checkbox" className="" onClick={handleCheck} />
+          <p className="text-xs text-[#5927E5]">Login as trainer</p>
         </div>
         {error && (
           <div className="flex justify-center">
