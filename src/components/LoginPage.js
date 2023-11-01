@@ -30,7 +30,7 @@ const LoginPage = () => {
     //   `http://localhost:5000/${check ? "login_trainer-data" : "login-data"}`
     // );
     const res = await fetch(
-      `http://localhost:5000/${check ? "login_trainer-data" : "login-data"}`,
+      "https://mern-backend-z9pr.onrender.com/login-data",
       {
         method: "POST",
         headers: {

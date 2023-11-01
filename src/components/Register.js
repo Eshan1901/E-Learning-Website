@@ -29,17 +29,20 @@ const Register = () => {
     }
     setstatus(true);
 
-    const res = await fetch(`"http://localhost:5000/"${check ? "register-trainer-data":'register-data'}`, {
-      method: "POST",
-      headers: {
-        "Content-type": "application/json",
-      },
-      body: JSON.stringify({
-        name,
-        email,
-        password,
-      }),
-    });
+    const res = await fetch(
+      "https://mern-backend-z9pr.onrender.com/register-data",
+      {
+        method: "POST",
+        headers: {
+          "Content-type": "application/json",
+        },
+        body: JSON.stringify({
+          name,
+          email,
+          password,
+        }),
+      }
+    );
     const data = await res.json();
     if (data.result === "Registered") {
       seterror("");
