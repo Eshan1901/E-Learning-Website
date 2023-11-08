@@ -1,38 +1,22 @@
-.App {
-  text-align: center;
-}
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500;600;700;800;900&display=swap');
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
-}
-
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+@layer components {
+  .input,
+  .textarea {
+    @apply my-1 border-black focus:outline-none bg-slate-200 w-72 px-3 py-1;
   }
-}
-
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
-}
-
-.App-link {
-  color: #61dafb;
-}
-
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
+  ,
+  .userDetailsCard {
+    @apply text-black font-extrabold group-hover:text-orange-400;
   }
-  to {
-    transform: rotate(360deg);
+  ,
+  .userDetailsCardh1 {
+    @apply text-gray-500 text-xl  group-hover:text-orange-200;
+  }
+  .inputTaskEdit {
+    @apply my-1 border-black focus:outline-none bg-slate-200 w-72 h-7 w-fit  px-2 py-1;
   }
 }
