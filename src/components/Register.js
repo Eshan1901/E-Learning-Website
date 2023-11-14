@@ -30,7 +30,6 @@ const Register = () => {
     setstatus(true);
 
     const res = await fetch(
-     //"http://localhost:5000/register-data",
      `https://mern-backend-z9pr.onrender.com/${check ? "trainer-register-data" : "register-data"}`,
       {
         method: "POST",
