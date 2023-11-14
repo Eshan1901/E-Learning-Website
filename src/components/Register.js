@@ -1,11 +1,10 @@
 import { motion } from "framer-motion";
+import { useNavigate } from "react-router-dom";
 import { useState } from "react";
 import undraw2 from "../assets/undraw2.svg";
 import LogoSvg from "../assets/LogoSvg.svg";
 import { Link } from "react-router-dom";
 import { ColorRing } from "react-loader-spinner";
-import { useNavigate, Navigate } from "react-router-dom";
-import Cookies from "js-cookie";
 
 const Register = () => {
   const [name, setname] = useState("");
@@ -53,10 +52,6 @@ const Register = () => {
       setstatus(false);
     }
   };
-      const token = Cookies.get("userId");
-      if (token !== undefined) {
-        return <Navigate to="/Dashboard" />;
-      }
   return (
     <div className="grid md:grid-flow-col place-items-center h-screen">
       <div className="md:flex hidden">

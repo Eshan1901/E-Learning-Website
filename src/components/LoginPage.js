@@ -1,37 +1,33 @@
 import { useState } from "react";
-import { useNavigate,Navigate } from "react-router-dom";
+import { useNavigate, Navigate } from "react-router-dom";
 import Cookies from "js-cookie";
 import { motion } from "framer-motion";
 import { Link } from "react-router-dom";
-import undraw2 from '../assets/undraw2.svg'
+import undraw2 from "../assets/undraw2.svg";
 import LogoSvg from "../assets/LogoSvg.svg";
 import { ColorRing } from "react-loader-spinner";
-
 
 const LoginPage = () => {
   const [email, setemail] = useState("");
   const [password, setpassword] = useState("");
   const [error, seterror] = useState("");
-  const [status, setstatus] = useState(false)
+  const [status, setstatus] = useState(false);
   const [check, setcheck] = useState(false);
   const navigate = useNavigate();
-    const handleCheck = (e) => {
-      setcheck(e.target.checked);
-
-    };
+  const handleCheck = (e) => {
+    setcheck(e.target.checked);
+  };
   const handleLogin = async () => {
     setstatus(true);
-        if (!email || !password) {
-          seterror("All feilds required");
-          setstatus(false);
-          return;
-        }
-    // console.log(
-    //   `http://localhost:5000/${check ? "login_trainer-data" : "login-data"}`
-    // );
+    if (!email || !password) {
+      seterror("All feilds required");
+      setstatus(false);
+      return;
+    }
     const res = await fetch(
-      "http://localhost:5000/login-data",
-      // "https://mern-backend-z9pr.onrender.com/login-data",
+      `https://mern-backend-z9pr.onrender.com/${
+        check ? "login-trainer-data" : "login-data"
+      }`,
       {
         method: "POST",
         headers: {
@@ -55,7 +51,7 @@ const LoginPage = () => {
   };
   const token = Cookies.get("userId");
   if (token !== undefined) {
-   return <Navigate to='/Dashboard'/>
+    return <Navigate to="/Dashboard" />;
   }
   return (
     <div className="h-screen grid md:grid-flow-col place-items-center">
@@ -124,6 +120,6 @@ const LoginPage = () => {
       </motion.div>
     </div>
   );
-}
+};
 
-export default LoginPage
+export default LoginPage;
