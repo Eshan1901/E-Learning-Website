@@ -26,11 +26,7 @@ const LoginPage = () => {
           setstatus(false);
           return;
         }
-    console.log(
-    `https://mern-backend-z9pr.onrender.com/${check ? "login_trainer-data" : "login-data"}`
-    );
     const res = await fetch(
-      //"http://localhost:5000/login-data",
       `https://mern-backend-z9pr.onrender.com/${check ? "login-trainer-data" : "login-data"}`,
       {
         method: "POST",
