@@ -6,10 +6,12 @@ const Navbar = () => {
         <img src={LogoSvg} width={150} />
         <div className="w-1/4 flex items-center">
           <input
-            className=" focus:outline-none border-b-2 w-full px-3 py-1"
+            className=" focus:outline-none border-b-2 border-[#5927E5]  w-full px-3 py-1"
             placeholder="Search Course"
           />
-          <AiOutlineSearch style={{ color: "black", fontSize: "25px" }} />
+          <AiOutlineSearch
+            style={{ color: "#5927E5", fontSize: "25px" }}
+          />
         </div>
       </div>
     );

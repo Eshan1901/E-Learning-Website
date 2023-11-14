@@ -1,12 +1,11 @@
-
 import { motion } from "framer-motion";
-import { useNavigate } from "react-router-dom";
 import { useState } from "react";
 import undraw2 from "../assets/undraw2.svg";
 import LogoSvg from "../assets/LogoSvg.svg";
-import { Link } from 'react-router-dom'
+import { Link } from "react-router-dom";
 import { ColorRing } from "react-loader-spinner";
-
+import { useNavigate, Navigate } from "react-router-dom";
+import Cookies from "js-cookie";
 
 const Register = () => {
   const [name, setname] = useState("");
@@ -14,24 +13,25 @@ const Register = () => {
   const [password, setpassword] = useState("");
   const [error, seterror] = useState("");
   const [status, setstatus] = useState(false);
-  const [check, setcheck] = useState(false)
+  const [check, setcheck] = useState(false);
 
-  const navigate = useNavigate()
-  
+  const navigate = useNavigate();
+
   const handleCheck = (e) => {
     setcheck(e.target.checked);
-  }
+  };
 
   const handleSignup = async () => {
     if (!email || !password || !name) {
-      seterror("All feilds required")
-      return
+      seterror("All feilds required");
+      return;
     }
     setstatus(true);
 
     const res = await fetch(
-     "http://localhost:5000/register-data",
-      // "https://mern-backend-z9pr.onrender.com/register-data",
+      `https://mern-backend-z9pr.onrender.com/${
+        check ? "trainer-register-data" : "register-data"
+      }`,
       {
         method: "POST",
         headers: {
@@ -53,6 +53,10 @@ const Register = () => {
       setstatus(false);
     }
   };
+      const token = Cookies.get("userId");
+      if (token !== undefined) {
+        return <Navigate to="/Dashboard" />;
+      }
   return (
     <div className="grid md:grid-flow-col place-items-center h-screen">
       <div className="md:flex hidden">
@@ -108,7 +112,7 @@ const Register = () => {
           </button>
         </div>
         <div className="flex justify-end gap-1 my-1">
-          <input type="checkbox" className="" onClick={handleCheck}/>
+          <input type="checkbox" className="" onClick={handleCheck} />
           <p className="text-xs text-[#5927E5]">Register as trainer</p>
         </div>
         {error && (
