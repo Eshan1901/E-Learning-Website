@@ -3,16 +3,15 @@ import USerSidebar from "./UserSidebar";
 import { AiOutlineClockCircle } from "react-icons/ai";
 import { FaStar, FaStarHalf } from "react-icons/fa";
 import { BsBagCheck } from "react-icons/bs";
-import { Navigate } from "react-router-dom";
-import Cookies from "js-cookie";
+import { useParams } from "react-router-dom";
 
 
 
 const CourseDetails = () => {
-  const userId = Cookies.get("userId");
-  if (userId === undefined) {
-    return <Navigate to="/Login" />;
-  }
+  const param = useParams()
+  const { courserId } = param;
+  // console.log(courserId);
+
     return (
       <>
         <div>

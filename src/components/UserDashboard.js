@@ -1,13 +1,12 @@
 import Cookies from 'js-cookie';
-import React, { useState } from 'react'
-import { Navigate, useNavigate } from 'react-router-dom';
+import React, { useEffect, useState } from 'react'
+import { Link, Navigate, useNavigate } from 'react-router-dom';
 import USerSidebar from "./UserSidebar";
 import Navbar from './Navbar';
 import { BsFillArrowUpRightSquareFill } from "react-icons/bs"
-// import { TbBrandNextjs } from "react-icons/tb"
-// import {AiOutlineClockCircle} from 'react-icons/ai'
 import CoursesTypeSelection from './CoursesTypeSelection';
 import CourseCard from './CourseCard';
+import { ColorRing } from "react-loader-spinner";
 
 const CoursesType = [
   {
@@ -16,56 +15,66 @@ const CoursesType = [
   },
   {
     id: 2,
-    type: "Wish List",
-  },
-  {
-    id: 3,
     type: "Registered",
   },
 ];
-
-const courses = [
-  {
-    id: 1,
-    courseTitle: "Nextjs",
-    iconUrl: "",
-    duration: "5:30Hr",
-    trainer: "Alex Carry",
-  },
-  {
-    id: 1,
-    courseTitle: "Nextjs",
-    iconUrl: "",
-    duration: "5:30Hr",
-    trainer: "Alex Carry",
-  },
-  {
-    id: 1,
-    courseTitle: "Nextjs",
-    iconUrl: "",
-    duration: "5:30Hr",
-    trainer: "Alex Carry",
-  },
-  ,
-  {
-    id: 1,
-    courseTitle: "Nextjs",
-    iconUrl: "",
-    duration: "5:30Hr",
-    trainer: "Alex Carry",
-  }
-];
 const UserDashboard = () => {
-  const [courseType, setcourseType] = useState("Registered");
+  const [courseType, setcourseType] = useState("Courses");
+  const [coursesDetails, setcoursesDetails] = useState({})
+  const [status, setstatus] = useState(false)
+
+  const getdetails = async () => {
+    setcoursesDetails({})
+    setstatus(false)
+    // console.log(`https://mern-backend-z9pr.onrender.com/${courseType}`);
+    const res = await fetch(`https://mern-backend-z9pr.onrender.com/${courseType}`, {
+      method: "POST",
+      headers: {
+        "Content-type":"application/json"
+      },
+    });
+    const data = await res.json()
+    setstatus(true)
+    setcoursesDetails(data.slice(1,15))
+  }
+
+  useEffect(() => {
+    getdetails()
+    return ()=>{}
+  },[courseType])
   const navigate=useNavigate()
   const userId = Cookies.get('userId')
   if (userId === undefined) {
     return <Navigate to="/Login" />;
   }
-  // const path = userProtected();
-  // if (path) {
-  //   return <Navigate to={path} />;
-  // }
+  const renderView = () => {
+    if (status) {
+      return (
+        <div className="mt-8 grid grid-cols-3 place-items-start gap-2">
+              {
+                coursesDetails.map((i) => {
+                  return <CourseCard data={i} />
+                })
+              }
+            </div>
+      )
+    }
+    else {
+      return (
+        <div className="h-[60vh] flex justify-center items-center ">
+          <ColorRing
+            visible={true}
+            height="80"
+            width="80"
+            ariaLabel="blocks-loading"
+            wrapperStyle={{}}
+            wrapperClass="blocks-wrapper"
+            colors={["white", "white", "white", "white", "white"]}
+          />
+        </div>
+      );
+    }
+  }
   return (
     <>
       <div>
@@ -113,13 +122,23 @@ const UserDashboard = () => {
                 );
               })}
             </div>
-            <div className="mt-8 flex flex-col gap-1">
+            {renderView()}
+            {status && (
+              <div className="flex justify-end mt-5">
+                <Link to='/courses'>
+                  <button className=" bg-white text-[#5927E5] px-4 py-2 rounded-xl">
+                    Show More
+                  </button>
+                </Link>
+              </div>
+            )}
+            {/* <div className="mt-8 flex flex-col gap-1">
               {
-                courses.map((i) => {
+                coursesDetails.map((i) => {
                   return <CourseCard data={i} />
                 })
               }
-            </div>
+            </div> */}
           </div>
         </div>
       </div>
