@@ -26,17 +26,17 @@ const CourseDetails = () => {
     );
     const data = await res.json()
     setcourseDetails(data)
-    //console.log(data)
+    console.log(data)
     setstatus(true)
   }
   useEffect(() => {
     getDetails()
     return ()=>{}
-  })
+  },[])
   console.log(courseDetails)
   const renderView = () => {
     if (status) {
-      const { name, teacher_name, ratings, description, time_to_complete } =
+      const { name, teacher_name, ratings, description, time_to_complete,image_url } =
         courseDetails;
       return (
         <>
