@@ -36,7 +36,7 @@ const CoursesPage = () => {
     const renderView = () => {
       if (status) {
         return (
-          <div className="my-5 grid grid-cols-3 place-items-start gap-2">
+          <div className="my-5 grid grid-cols-2 place-items-start gap-2">
             {courseDetails.map((i) => {
               return <CourseCard data={i} />;
             })}
@@ -64,7 +64,7 @@ const CoursesPage = () => {
         <Navbar />
       </div>
       <div className=" h-screen flex justify-center items-center px-10 py-10 gap-4">
-        <div className="hidden md:grid bg-white h-full w-1/6  rounded-3xl  shadow-xl">
+        <div className="hidden md:grid bg-white h-full w-1/6  rounded-3xl shadow-xl">
           <USerSidebar />
         </div>
         <div className="grow bg-[#5927E5] h-full rounded-3xl px-10 pt-10 text-white overflow-y-scroll">

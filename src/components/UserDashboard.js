@@ -35,7 +35,7 @@ const UserDashboard = () => {
     });
     const data = await res.json()
     setstatus(true)
-    setcoursesDetails(data.slice(1,15))
+    setcoursesDetails(data.slice(1,13))
   }
 
   useEffect(() => {
