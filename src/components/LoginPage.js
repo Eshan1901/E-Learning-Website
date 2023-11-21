@@ -1,4 +1,4 @@
-import { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { useNavigate, Navigate } from "react-router-dom";
 import Cookies from "js-cookie";
 import { motion } from "framer-motion";
@@ -6,6 +6,7 @@ import { Link } from "react-router-dom";
 import undraw2 from "../assets/undraw2.svg";
 import LogoSvg from "../assets/LogoSvg.svg";
 import { ColorRing } from "react-loader-spinner";
+import axios from "axios";
 
 const LoginPage = () => {
   const [email, setemail] = useState("");
@@ -14,9 +15,11 @@ const LoginPage = () => {
   const [status, setstatus] = useState(false);
   const [check, setcheck] = useState(false);
   const navigate = useNavigate();
+  
   const handleCheck = (e) => {
     setcheck(e.target.checked);
   };
+
   const handleLogin = async () => {
     setstatus(true);
     if (!email || !password) {
@@ -25,8 +28,7 @@ const LoginPage = () => {
       return;
     }
     const res = await fetch(
-      `https://mern-backend-z9pr.onrender.com/${
-        check ? "login-trainer-data" : "login-data"
+      `https://mern-backend-z9pr.onrender.com/${check ? "login-trainer-data" : "login-data"
       }`,
       {
         method: "POST",
@@ -39,8 +41,10 @@ const LoginPage = () => {
         }),
       }
     );
+
+
     const data = await res.json();
-    console.log(data);
+    //console.log(data);
     if (data.loginStatus === "Success") {
       Cookies.set("userId", data.id, { expires: 10 });
       navigate("/Dashboard");
@@ -121,5 +125,6 @@ const LoginPage = () => {
     </div>
   );
 };
+
 
 export default LoginPage;

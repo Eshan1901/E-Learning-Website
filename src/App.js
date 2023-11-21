@@ -7,6 +7,7 @@ import UserDashboard from "./components/UserDashboard";
 import IntroPage from './components/IntroPage';
 import CourseDetails from './components/CourseDetails';
 import CoursesPage from './components/CoursesPage';
+import Wishlist from './components/Wishlist';
 
 function App() {
   return (
@@ -18,6 +19,7 @@ function App() {
         <Route exact path="/Dashboard" Component={UserDashboard} />
         <Route exact path='/Course/:courserId' Component={CourseDetails} />
         <Route exact path='/Courses' Component={CoursesPage}/>
+        <Route exact path='/Wishlist' Component={Wishlist}/>
       </Routes>
     </div>
   );

@@ -7,6 +7,7 @@ import { BsFillArrowUpRightSquareFill } from "react-icons/bs"
 import CoursesTypeSelection from './CoursesTypeSelection';
 import CourseCard from './CourseCard';
 import { ColorRing } from "react-loader-spinner";
+import axios from 'axios';
 
 const CoursesType = [
   {
@@ -21,6 +22,7 @@ const CoursesType = [
 const UserDashboard = () => {
   const [courseType, setcourseType] = useState("Courses");
   const [coursesDetails, setcoursesDetails] = useState({})
+  const [userData,setUserData] = useState({});
   const [status, setstatus] = useState(false)
 
   const getdetails = async () => {
@@ -39,13 +41,28 @@ const UserDashboard = () => {
   }
 
   useEffect(() => {
-    getdetails()
+    getdetails();
+    getUserData();
     return ()=>{}
   },[courseType])
   const navigate=useNavigate()
-  const userId = Cookies.get('userId')
+  const userId = Cookies.get('userId');
   if (userId === undefined) {
     return <Navigate to="/Login" />;
+  }
+  const getUserData = async() => {
+    try {
+      // `https://mern-backend-z9pr.onrender.com/user/${userId}`
+      const foundUser = await axios.post(`https://mern-backend-z9pr.onrender.com/user/${userId}`, {
+        headers: {
+          "Content-type":"application/json"
+        },
+      });
+      setUserData(foundUser.data);
+    }
+    catch(error) {
+      console.log(error)
+    }
   }
   const renderView = () => {
     if (status) {
@@ -75,6 +92,7 @@ const UserDashboard = () => {
       );
     }
   }
+ 
   return (
     <>
       <div>
@@ -89,7 +107,7 @@ const UserDashboard = () => {
             <div>
               <p>Welcome Back</p>
               <h1 className="flex items-baseline gap-1 mt-2 text-4xl font-bold">
-                A Chandu Royal
+                {userData.name}
                 <BsFillArrowUpRightSquareFill style={{ fontSize: "15px" }} />
               </h1>
             </div>

@@ -6,15 +6,15 @@ import { BsBagCheck } from "react-icons/bs";
 import { useParams } from "react-router-dom";
 import { useEffect, useState } from "react";
 import { ColorRing } from "react-loader-spinner";
-
-
+import Cookies from "js-cookie";
+import axios from "axios";
 
 const CourseDetails = () => {
   const [courseDetails, setcourseDetails] = useState({})
   const [status, setstatus] = useState(false)
   const param = useParams()
   const { courserId } = param;
-  const getDetails = async() => {
+  const getDetails = async () => {
     const res = await fetch(
       `https://mern-backend-z9pr.onrender.com/courses/${courserId}`,
       {
@@ -31,12 +31,22 @@ const CourseDetails = () => {
   }
   useEffect(() => {
     getDetails()
-    return ()=>{}
-  },[])
-  console.log(courseDetails)
+    return () => { }
+  }, [])
+  console.log(courseDetails);
+
+  const addToWishlist = async () => {
+    const userId = Cookies.get("userId");
+    console.log(userId, courserId);
+    const wishlistData = {
+      userId,
+      courserId
+    }
+    const response = await axios.post("https://mern-backend-z9pr.onrender.com/wishlistData",wishlistData);
+  }
   const renderView = () => {
     if (status) {
-      const { name, teacher_name, ratings, description, time_to_complete,image_url } =
+      const { name, teacher_name, ratings, description, time_to_complete, image_url } =
         courseDetails;
       return (
         <>
@@ -93,7 +103,7 @@ const CourseDetails = () => {
           </div>
           <div className="flex justify-end gap-10 my-5">
             <button className="text-white">
-              <BsBagCheck style={{ fontSize: "25px" }} />
+              <BsBagCheck style={{ fontSize: "25px" }} onClick={addToWishlist} />
             </button>
             <button className="bg-white text-[#5927E5] px-8 py-2 rounded-lg">
               Start
@@ -118,21 +128,21 @@ const CourseDetails = () => {
       );
     }
   }
-    return (
-      <>
-        <div>
-          <Navbar />
+  return (
+    <>
+      <div>
+        <Navbar />
+      </div>
+      <div className=" h-screen flex justify-center items-center px-10 py-10 gap-4">
+        <div className="hidden md:grid bg-white h-full w-1/6  rounded-3xl  shadow-xl">
+          <USerSidebar />
         </div>
-        <div className=" h-screen flex justify-center items-center px-10 py-10 gap-4">
-          <div className="hidden md:grid bg-white h-full w-1/6  rounded-3xl  shadow-xl">
-            <USerSidebar />
-          </div>
-          <div className="grow bg-[#5927E5] h-full rounded-3xl px-10 pt-10 text-white">
-            {renderView()}
-          </div>
+        <div className="grow bg-[#5927E5] h-full rounded-3xl px-10 pt-10 text-white">
+          {renderView()}
         </div>
-      </>
-    );
+      </div>
+    </>
+  );
 }
 
 export default CourseDetails
