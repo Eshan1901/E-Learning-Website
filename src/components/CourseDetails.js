@@ -106,7 +106,7 @@ const CourseDetails = () => {
               <BsBagCheck style={{ fontSize: "25px" }} onClick={addToWishlist} />
             </button>
             <button className="bg-white text-[#5927E5] px-8 py-2 rounded-lg">
-              Start
+              Register
             </button>
           </div>
         </>

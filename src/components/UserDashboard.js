@@ -103,7 +103,7 @@ const UserDashboard = () => {
           <USerSidebar />
         </div>
         <div className="grow bg-[#5927E5] h-full rounded-3xl px-10 pt-10 text-white">
-          <div className="flex justify-between mb-20">
+          <div className="flex justify-between mb-10">
             <div>
               <p>Welcome Back</p>
               <h1 className="flex items-baseline gap-1 mt-2 text-4xl font-bold">
