@@ -39,6 +39,22 @@ const UserDashboard = () => {
     setstatus(true)
     setcoursesDetails(data.slice(1,13))
   }
+  const getUserData = async () => {
+    try {
+      // `https://mern-backend-z9pr.onrender.com/user/${userId}`
+      const foundUser = await axios.post(
+        `https://mern-backend-z9pr.onrender.com/user/${userId}`,
+        {
+          headers: {
+            "Content-type": "application/json",
+          },
+        }
+      );
+      setUserData(foundUser.data);
+    } catch (error) {
+      console.log(error);
+    }
+  };
 
   useEffect(() => {
     getdetails();
@@ -50,20 +66,7 @@ const UserDashboard = () => {
   if (userId === undefined) {
     return <Navigate to="/Login" />;
   }
-  const getUserData = async() => {
-    try {
-      // `https://mern-backend-z9pr.onrender.com/user/${userId}`
-      const foundUser = await axios.post(`https://mern-backend-z9pr.onrender.com/user/${userId}`, {
-        headers: {
-          "Content-type":"application/json"
-        },
-      });
-      setUserData(foundUser.data);
-    }
-    catch(error) {
-      console.log(error)
-    }
-  }
+  
   const renderView = () => {
     if (status) {
       return (

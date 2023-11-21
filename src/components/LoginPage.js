@@ -15,7 +15,7 @@ const LoginPage = () => {
   const [status, setstatus] = useState(false);
   const [check, setcheck] = useState(false);
   const navigate = useNavigate();
-  
+
   const handleCheck = (e) => {
     setcheck(e.target.checked);
   };
@@ -28,8 +28,9 @@ const LoginPage = () => {
       return;
     }
     const res = await fetch(
-      `https://mern-backend-z9pr.onrender.com/${check ? "login-trainer-data" : "login-data"
-      }`,
+      `http://localhost:5000/${check ? "login-trainer-data" : "login-data"}`,
+      // `https://mern-backend-z9pr.onrender.com/${check ? "login-trainer-data" : "login-data"
+      // }`,
       {
         method: "POST",
         headers: {
@@ -42,12 +43,16 @@ const LoginPage = () => {
       }
     );
 
-
     const data = await res.json();
     //console.log(data);
     if (data.loginStatus === "Success") {
-      Cookies.set("userId", data.id, { expires: 10 });
-      navigate("/Dashboard");
+      if (data.id.startsWith("trainer")) {
+        Cookies.set("trainerId", data._id, { expires: 10 });
+        navigate("/Trainer");
+      } else {
+        Cookies.set("userId", data._id, { expires: 10 });
+        navigate("/Dashboard");
+      }
     } else {
       seterror(data.error);
       setstatus(false);
@@ -56,6 +61,10 @@ const LoginPage = () => {
   const token = Cookies.get("userId");
   if (token !== undefined) {
     return <Navigate to="/Dashboard" />;
+  }
+  const trainerToken = Cookies.get("trainerId");
+  if (trainerToken !== undefined) {
+    return <Navigate to="/Trainer" />;
   }
   return (
     <div className="h-screen grid md:grid-flow-col place-items-center">
@@ -125,6 +134,5 @@ const LoginPage = () => {
     </div>
   );
 };
-
 
 export default LoginPage;
