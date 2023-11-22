@@ -20,20 +20,28 @@ const CoursesType = [
   },
 ];
 const UserDashboard = () => {
+  
   const [courseType, setcourseType] = useState("Courses");
   const [coursesDetails, setcoursesDetails] = useState({})
   const [userData,setUserData] = useState({});
   const [status, setstatus] = useState(false)
 
+  const userId = Cookies.get('userId');
+  
+
   const getdetails = async () => {
     setcoursesDetails({})
     setstatus(false)
     // console.log(`https://mern-backend-z9pr.onrender.com/${courseType}`);
-    const res = await fetch(`https://mern-backend-z9pr.onrender.com/${courseType}`, {
+    //https://mern-backend-z9pr.onrender.com
+    const res = await fetch(`http://localhost:5000/${courseType}`, {
       method: "POST",
       headers: {
         "Content-type":"application/json"
       },
+      body: JSON.stringify({
+        userId
+      })
     });
     const data = await res.json()
     setstatus(true)
@@ -62,7 +70,7 @@ const UserDashboard = () => {
     return ()=>{}
   },[courseType])
   const navigate=useNavigate()
-  const userId = Cookies.get('userId');
+ 
   if (userId === undefined) {
     return <Navigate to="/Login" />;
   }
@@ -148,7 +156,7 @@ const UserDashboard = () => {
               <div className="flex justify-end mt-5">
                 <Link to='/courses'>
                   <button className=" bg-white text-[#5927E5] px-4 py-2 rounded-xl">
-                    Show More
+                    All courses
                   </button>
                 </Link>
               </div>
