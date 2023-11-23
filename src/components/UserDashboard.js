@@ -33,8 +33,7 @@ const UserDashboard = () => {
     setcoursesDetails({})
     setstatus(false)
     // console.log(`https://mern-backend-z9pr.onrender.com/${courseType}`);
-    //https://mern-backend-z9pr.onrender.com
-    const res = await fetch(`http://localhost:5000/${courseType}`, {
+    const res = await fetch(`https://mern-backend-z9pr.onrender.com/${courseType}`, {
       method: "POST",
       headers: {
         "Content-type":"application/json"

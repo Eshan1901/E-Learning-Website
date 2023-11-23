@@ -30,16 +30,14 @@ const USerSidebar = () => {
             <p className="ml-5  text-lg font-semibold">Wish List</p>
           </button>
         </Link>
-        <button className="bg-white text-black flex hover:bg-[#5927E5] hover:text-white items-center w-full rounded-md px-4 py-2">
-          <BsGraphUpArrow style={{ fontSize: "20px" }} />
-          <p className="ml-5  text-lg font-semibold">My Journey</p>
-        </button>
       </div>
       <div className="w-full flex flex-col gap-5 border-t-2 border-t-[#5927E5] pt-10">
-        <button className="bg-white text-black flex hover:bg-[#5927E5] hover:text-white items-center w-full rounded-md px-4 py-2">
-          <AiOutlineUser style={{ fontSize: "20px" }} />
-          <p className="ml-5  text-lg font-semibold">Profile</p>
-        </button>
+        <Link to="/Profile">
+          <button className="bg-white text-black flex hover:bg-[#5927E5] hover:text-white items-center w-full rounded-md px-4 py-2">
+            <AiOutlineUser style={{ fontSize: "20px" }} />
+            <p className="ml-5  text-lg font-semibold">Profile</p>
+          </button>
+        </Link>
         <button
           className="bg-white text-black flex hover:bg-[#5927E5] hover:text-white items-center w-full rounded-md px-4 py-2"
           onClick={handleLogout}

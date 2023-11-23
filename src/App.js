@@ -10,6 +10,7 @@ import CoursesPage from './components/CoursesPage';
 import Wishlist from './components/Wishlist';
 import TrainerDashboard from './components/trainer/TrainerDashboard';
 import TAddCourse from './components/trainer/TAddCourse';
+import Profile from './components/Profile';
 
 function App() {
   return (
@@ -24,6 +25,7 @@ function App() {
         <Route exact path="/Wishlist" Component={Wishlist} />
         <Route exact path="/Trainer" Component={TrainerDashboard} />
         <Route exact path="/AddCourse" Component={TAddCourse} />
+        <Route exact path="/Profile" Component={Profile} />
       </Routes>
     </div>
   );
