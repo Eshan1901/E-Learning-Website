@@ -93,12 +93,12 @@ function Wishlist(props) {
         <div className="grow bg-[#5927E5] h-full rounded-3xl px-10 pt-10 text-white">
           <div className="flex justify-between mb-10">
             <div>
-              <h1 className="text-xl border-b-2 w-fit pb-1 ">Wishlist</h1>
+              <h1 className="text-xl border-b-2 w-fit pb-1 ">My Courses</h1>
             </div>
             <div className="flex gap-2">
               <div className="flex items-center gap-3 bg-white text-[#5927E5] px-5 py-3 rounded-lg">
                 <h1 className="text-4xl font-semibold">11</h1>
-                <p>Wish List Courses</p>
+                <p>Courses</p>
               </div>
             </div>
           </div>

@@ -27,7 +27,7 @@ const USerSidebar = () => {
         <Link to="/Wishlist">
           <button className="bg-white text-black flex hover:bg-[#5927E5] hover:text-white items-center w-full rounded-md px-4 py-2">
             <BsBagCheck style={{ fontSize: "20px" }} />
-            <p className="ml-5  text-lg font-semibold">Wish List</p>
+            <p className="ml-5  text-lg font-semibold">My Courses</p>
           </button>
         </Link>
       </div>

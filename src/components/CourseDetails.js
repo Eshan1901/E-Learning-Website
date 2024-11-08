@@ -102,10 +102,8 @@ const CourseDetails = () => {
             </p>
           </div>
           <div className="flex justify-end gap-10 my-5">
-            <button className="text-white">
+            <button className="bg-white text-[#5927E5] px-8 py-2 rounded-lg flex justify-center gap-2">
               <BsBagCheck style={{ fontSize: "25px" }} onClick={addToWishlist} />
-            </button>
-            <button className="bg-white text-[#5927E5] px-8 py-2 rounded-lg">
               Register
             </button>
           </div>

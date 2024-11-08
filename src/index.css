@@ -1,4 +1,6 @@
-
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
 .profile-container {
     margin-top: 5%;
     margin-left: 10%;
